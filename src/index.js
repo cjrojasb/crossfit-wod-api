@@ -1,13 +1,16 @@
 const express = require("express");
 const morgan = require("morgan");
-const v1Router = require("./v1/routes");
+const v1WorkoutRouter = require("./v1/routes/workoutRoutes");
 
 const PORT = process.env.PORT || 8000;
 const app = express();
 
+// middlewares
 app.use(morgan("dev"));
+app.use(express.json());
 
-app.use("/api/v1", v1Router);
+// routing
+app.use("/api/v1/workouts", v1WorkoutRouter);
 
 app.listen(PORT, () => {
   console.log(`API is running on port ${PORT}`);
